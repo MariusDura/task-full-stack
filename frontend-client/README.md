@@ -8,6 +8,8 @@
 # install dependencies
 npm install
 
+# before running server, write down api server url in src/constants.js file
+
 # serve with hot reload at localhost:8080
 npm run dev
 
