@@ -46,6 +46,28 @@ class UserUpdateRequest extends FormRequest
     }
 
     /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'address.street.required' => 'The street field is required.',
+            'address.suite.required' => 'The suite field is required.',
+            'address.city.required' => 'The city field is required.',
+            'address.zipcode.required' => 'The zipcode field is required.',
+            'address.geo.lat.required' => 'The geo lat field is required.',
+            'address.geo.lat.numeric' =>'The geo lat must be a number.',
+            'address.geo.lng.required' => 'The geo lng field is required.',
+            'address.geo.lng.numeric' =>'The geo lng must be a number.',
+            'company.name.required' => 'The name field is required.',
+            'company.catch_phrase.required' => 'The catch phrase field is required.',
+            'company.bs.required' => 'The bs field is required.'
+        ];
+    }
+
+    /**
      * Handle a failed validation attempt.
      *
      * @param  \Illuminate\Contracts\Validation\Validator $validator
