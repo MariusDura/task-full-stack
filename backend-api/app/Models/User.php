@@ -2,29 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'phone', 'website', 'address_id', 'company_id'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Get address that belongs to the user
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'id', 'address_id');
+    }
+
+    /**
+     * Get company that belongs to the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id');
+    }
 }

@@ -28,9 +28,20 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
+            'name' => 'required|string|max:30',
+            'username' => 'required',
             'email' => 'required|unique:users|email',
-            'password' => 'required|min:6|confirmed'
+            'phone' => 'required|string',
+            'website' => 'required|string|max:190',
+            'address.street' => 'required|string',
+            'address.suite' => 'required|string',
+            'address.city' => 'required|string',
+            'address.zipcode' => 'required|string',
+            'address.geo.lat' => 'required|numeric',
+            'address.geo.lng' => 'required|numeric',
+            'company.name' => 'required|string',
+            'company.catch_phrase' => 'required|string',
+            'company.bs' => 'required|string'
         ];
     }
 
@@ -42,10 +53,11 @@ class UserStoreRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    /* uncomment if getting 404 error on validation
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();
         throw new HttpResponseException(response()->json(['errors' => $errors
         ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
-    }
+    }*/
 }
